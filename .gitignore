@@ -1,0 +1,38 @@
+# Project cache and build artifacts
+*.cache/
+project_mini_projet1.cache/
+
+# Hardware project files (regenerated)
+*.hw/
+project_mini_projet1.hw/
+
+# Simulation files (regenerated)
+*.sim/
+project_mini_projet1.sim/
+
+# User-specific files
+*.lp_user_files/
+project_mini_projet1.lp_user_files/
+
+# Project archive files
+*.arcs/
+project_mini_projet1.arcs/
+
+# IDE project files (user-specific)
+*.xpr
+project_mini_projet1.xpr
+
+# Simulation waveform configurations (user-specific)
+*.wcfg
+tb_arm_proc_behav.wcfg
+
+# Temporary files
+*.tmp
+*.log
+*.jou
+
+# Build directories
+_/
+*.runs/
+*.gen/
+*.ip_user_files/
