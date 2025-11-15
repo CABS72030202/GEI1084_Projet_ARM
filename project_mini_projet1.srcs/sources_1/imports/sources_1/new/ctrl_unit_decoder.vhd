@@ -18,6 +18,7 @@
 -- Revision:
 -- Revision 0.01 - File Created
 -- Revision 0.02 - Component interconnections completed
+-- Revision 1.00 - Add output NoWrite
 -- Additional Comments:
 --
 ----------------------------------------------------------------------------------
@@ -38,7 +39,8 @@ entity ctrl_unit_decoder is
            ALUSrc       : out STD_LOGIC;
            ImmSrc       : out STD_LOGIC_VECTOR (1 downto 0);
            RegSrc       : out STD_LOGIC_VECTOR (1 downto 0);
-           ALUControl   : out STD_LOGIC_VECTOR (1 downto 0)
+           ALUControl   : out STD_LOGIC_VECTOR (1 downto 0);
+           NoWrite      : out STD_LOGIC
     );
 end ctrl_unit_decoder;
 
@@ -74,7 +76,8 @@ architecture struct of ctrl_unit_decoder is
             Funct       : in STD_LOGIC_VECTOR (4 downto 0);
             ALUOp       : in STD_LOGIC;
             ALUControl  : out STD_LOGIC_VECTOR (1 downto 0);
-            FlagW       : out STD_LOGIC_VECTOR (1 downto 0)
+            FlagW       : out STD_LOGIC_VECTOR (1 downto 0);
+            NoWrite     : out STD_LOGIC
         );
     end component;
     
@@ -110,6 +113,7 @@ begin
             Funct       => Funct(4 downto 0),
             ALUOp       => ALUOp,
             ALUControl  => ALUControl,
-            FlagW       => FlagW
+            FlagW       => FlagW,
+            NoWrite     => NoWrite
         );
 end struct;

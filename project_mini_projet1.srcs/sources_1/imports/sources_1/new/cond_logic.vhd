@@ -21,6 +21,7 @@
 -- Revision:
 -- Revision 0.01 - File Created
 -- Revision 0.02 - Component interconnections and logic completed
+-- Revision 1.00 - Add input NoWrite
 -- Additional Comments:
 --    
 ----------------------------------------------------------------------------------
@@ -37,6 +38,7 @@ entity cond_logic is
            FlagW    : in STD_LOGIC_VECTOR (1 downto 0);
            Cond     : in STD_LOGIC_VECTOR (3 downto 0);
            ALUFlags : in STD_LOGIC_VECTOR (3 downto 0);
+           NoWrite  : in STD_LOGIC;
            PCSrc    : out STD_LOGIC;
            RegWrite : out STD_LOGIC;
            MemWrite : out STD_LOGIC
@@ -104,7 +106,7 @@ begin
     
     -- Link outputs
     PCSrc       <= CondEx and PCS;
-    RegWrite    <= CondEx and RegW;
+    RegWrite    <= CondEx and RegW and not NoWrite;
     MemWrite    <= CondEx and MemW;
 
 end struct;

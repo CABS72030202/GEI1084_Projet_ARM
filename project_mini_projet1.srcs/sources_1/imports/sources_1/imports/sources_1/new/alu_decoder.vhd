@@ -17,6 +17,7 @@
 -- 
 -- Revision:
 -- Revision 0.01 - File Created
+-- Revision 1.00 - Add output NoWrite
 -- Additional Comments:
 -- 
 ----------------------------------------------------------------------------------
@@ -29,7 +30,8 @@ entity alu_decoder is
         Funct       : in STD_LOGIC_VECTOR (4 downto 0);
         ALUOp       : in STD_LOGIC;
         ALUControl  : out STD_LOGIC_VECTOR (1 downto 0);
-        FlagW       : out STD_LOGIC_VECTOR (1 downto 0)
+        FlagW       : out STD_LOGIC_VECTOR (1 downto 0);
+        NoWrite     : out STD_LOGIC
     );
 end alu_decoder;
 
@@ -46,18 +48,26 @@ begin
                     ALUControl  <= "00";
                     FlagW(1)    <= Funct(0);
                     FlagW(0)    <= Funct(0);
+                    NoWrite     <= '0';
                 when "0010" =>          -- SUB
                     ALUControl  <= "01";
                     FlagW(1)    <= Funct(0);
-                    FlagW(0)    <= Funct(0);                
+                    FlagW(0)    <= Funct(0);  
+                    NoWrite     <= '0';
                 when "0000" =>          -- AND
                     ALUControl  <= "10";
                     FlagW(1)    <= Funct(0);
-                    FlagW(0)    <= '0';                
+                    FlagW(0)    <= '0';            
+                    NoWrite     <= '0';
                 when "1100" =>          -- ORR
                     ALUControl  <= "11";
                     FlagW(1)    <= Funct(0);
-                    FlagW(0)    <= '0';                
+                    FlagW(0)    <= '0';
+                    NoWrite     <= '0';
+                when "1010" =>          -- CMP
+                    ALUControl  <= "01";
+                    FlagW       <= "11";
+                    NoWrite     <= '1';
                 when others =>
             end case;
         end if;

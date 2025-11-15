@@ -20,6 +20,7 @@
 -- Revision:
 -- Revision 0.01 - File Created
 -- Revision 0.02 - Complete control unit integration completed
+-- Revision 1.00 - Add signal NoWrite
 -- Additional Comments:
 --    
 ----------------------------------------------------------------------------------
@@ -62,7 +63,8 @@ architecture struct of ctrl_unit is
                ALUSrc       : out STD_LOGIC;
                ImmSrc       : out STD_LOGIC_VECTOR (1 downto 0);
                RegSrc       : out STD_LOGIC_VECTOR (1 downto 0);
-               ALUControl   : out STD_LOGIC_VECTOR (1 downto 0)
+               ALUControl   : out STD_LOGIC_VECTOR (1 downto 0);
+               NoWrite      : out STD_LOGIC
         );
     end component;
     
@@ -76,6 +78,7 @@ architecture struct of ctrl_unit is
                FlagW    : in STD_LOGIC_VECTOR (1 downto 0);
                Cond     : in STD_LOGIC_VECTOR (3 downto 0);
                ALUFlags : in STD_LOGIC_VECTOR (3 downto 0);
+               NoWrite  : in STD_LOGIC;
                PCSrc    : out STD_LOGIC;
                RegWrite : out STD_LOGIC;
                MemWrite : out STD_LOGIC
@@ -83,8 +86,8 @@ architecture struct of ctrl_unit is
     end component;
     
     -- Internal signals
-    signal FlagW : STD_LOGIC_vECTOR(1 downto 0);
-    signal PCS, RegW, MemW : STD_LOGIC;
+    signal FlagW : STD_LOGIC_VECTOR(1 downto 0);
+    signal PCS, RegW, MemW, NoWrite : STD_LOGIC;
 begin
 
     -- Instantiate components
@@ -101,7 +104,8 @@ begin
             ALUSrc      => ALUSrc,
             ImmSrc      => ImmSrc,
             RegSrc      => RegSrc,
-            ALUControl  => ALUControl
+            ALUControl  => ALUControl,
+            NoWrite     => NoWrite
         );
         
     C_LOGIC:    cond_logic
@@ -114,6 +118,7 @@ begin
             FlagW       => FlagW,
             Cond        => Cond,
             ALUFlags    => ALUFlags,
+            NoWrite     => NoWrite,
             PCSrc       => PCSrc,
             RegWrite    => RegWrite,
             MemWrite    => MemWrite
