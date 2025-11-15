@@ -12,7 +12,7 @@
 --    Complete ARM data path connecting register file, ALU, data memory, and extend unit.
 --    Implements the red-dotted section from Figure 1 with all control signals and multiplexers.
 -- 
--- Dependencies: register_file, extend, data_memory, alu_flags, mux2
+-- Dependencies: register_file, extend, data_memory, alu_flags, mux2, shifter
 -- 
 -- Revision:
 -- Revision 0.01 - File Created
@@ -20,6 +20,7 @@
 -- Revision 1.01 - Added outputs for ALUResult and WriteData
 -- Revision 2.00 - Added asynchronous RESET
 -- Revision 2.01 - Added R15 to datapath
+-- Revision 3.00 - Added shifter to datapath
 -- Additional Comments:
 -- 
 ----------------------------------------------------------------------------------
@@ -114,8 +115,18 @@ architecture struct of bank_register is
         );
     end component;
     
+    component shifter is
+        generic (N : integer := 32);
+        Port (
+            input_data   : in STD_LOGIC_VECTOR (N-1 downto 0);
+            shift_amount : in STD_LOGIC_VECTOR (4 downto 0);
+            shift_type   : in STD_LOGIC_VECTOR (1 downto 0);
+            output_data  : out STD_LOGIC_VECTOR (N-1 downto 0)
+        );
+    end component;
+    
     -- Internal Signals
-    signal WD3, ExtImm, SrcA, SrcB, ReadData : STD_LOGIC_VECTOR(M-1 downto 0);
+    signal WD3, ExtImm, SrcA, SrcB, ReadData, Shifted_SrcB : STD_LOGIC_VECTOR(M-1 downto 0);
     signal RA1, RA2 : STD_LOGIC_VECTOR(3 downto 0);
 begin
 
@@ -141,7 +152,7 @@ begin
     MUX_3:      mux2
         generic map (N => M)
         port map (
-            d0 => WriteData,
+            d0 => Shifted_SrcB,
             d1 => ExtImm,
             s  => ALUSrc,
             y  => SrcB
@@ -202,6 +213,16 @@ begin
             alu_control => ALUControl,
             result      => ALUResult,
             alu_flags   => ALUFlags
+        );
+        
+    -- Instantiate Shifter
+    SHIFT:      shifter
+        generic map (N => M)
+        port map (
+            input_data      => WriteData,
+            shift_amount    => Instr(11 downto 7),
+            shift_type      => Instr(6 downto 5),
+            output_data     => Shifted_SrcB
         );
         
     -- Link outputs
