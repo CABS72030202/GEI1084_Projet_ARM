@@ -68,6 +68,10 @@ begin
                     ALUControl  <= "01";
                     FlagW       <= "11";
                     NoWrite     <= '1';
+                when "0111" =>          -- CMN
+                    ALUControl  <= "00";
+                    FlagW       <= "11";
+                    NoWrite     <= '1';
                 when others =>
             end case;
         end if;

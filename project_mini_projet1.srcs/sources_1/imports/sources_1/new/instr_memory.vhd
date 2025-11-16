@@ -20,6 +20,7 @@
 -- Revision:
 -- Revision 0.01 - File Created
 -- Revision 0.02 - Instruction memory initialization completed
+-- Revision 1.00 - Added instructions for CMP and CMN
 -- Additional Comments:
 --    The memory is organized as a 32-bit wide array with 32 locations.
 --    Instructions are stored in little-endian format as 32-bit words.
@@ -43,7 +44,7 @@ entity instr_memory is
 end instr_memory;
 
 architecture synth of instr_memory is
-    type mem_array is array (M-1 downto 0) of STD_LOGIC_VECTOR(M-1 downto 0);
+    type mem_array is array (2*M-1 downto 0) of STD_LOGIC_VECTOR(M-1 downto 0);
     signal mem : mem_array := (others => (others => '0'));  -- Initialize to 0
 begin
     -- Fill instruction memory
@@ -67,7 +68,11 @@ begin
     mem(17) <= "11100010100000000010000000001101";
     mem(18) <= "11100010100000000010000000001010";
     mem(19) <= "11100101100000000010000001100100";
-    
+    mem(20) <= X"E3520005";
+    mem(21) <= X"E1530004";
+    mem(22) <= X"E2F50001";
+    mem(23) <= X"E0F20003";
+
     -- Output (PC[6:2])nth instruction
     Rd <= mem(TO_INTEGER(unsigned(A(6 downto 2))));
 end synth;
