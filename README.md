@@ -2,7 +2,7 @@
 
 Processeur ARM Monocycle VHDL & Extensions
 
-**Auteur :** Sébastien Cabana (CABS72030202), Yohan Lefebvre(), Ralph Futa(FUTR5080200), Robin Marques (MARR80110000) 
+**Auteur :** Sébastien Cabana (CABS72030202), Yohan Lefebvre(LEFY84100106), Ralph Futa(FUTR5080200), Robin Marques (MARR80110000) 
 **Cours :** GEI1084 - Architecture des ordinateurs et calcul accéléré
 **Établissement :** Université du Québec à Trois-Rivières (UQTR)
 **Semestre :** Automne 2025
