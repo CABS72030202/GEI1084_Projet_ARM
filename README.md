@@ -64,7 +64,7 @@ Le choix de la licence MIT est motivé par sa permissivité qui favorise l'adopt
 ## 5. Responsabilité de Version (Release Policy)
 
 Ce code est fourni dans un but éducatif et expérimental.
-* **Responsabilité :** Les auteurs déclinent toutes responsabilités quant aux dysfonctionnements potentiels dans un environnement de production critique. L'utilisateur assume l'entière responsabilité de la synthèse et de l'implémentation matérielle.
+* **Responsabilité :** Les auteurs déclinent toutes responsabilités quant aux dysfonctionnements potentiels dans un environnement de production critique ainsi que dans un cadre amateur. L'utilisateur assume l'entière responsabilité de la synthèse et de l'implémentation matérielle.
 * **Maintenance et Bug Fixes :** Ce projet étant réalisé dans un cadre strictement pédagogique, il est fourni à titre d'archive finale. Par conséquent, aucun suivi, aucune maintenance active ni aucune mise à jour de la documentation ne seront effectués après la fin du cours.
 
 ## 6. Sécurité et Analyse de Coûts
