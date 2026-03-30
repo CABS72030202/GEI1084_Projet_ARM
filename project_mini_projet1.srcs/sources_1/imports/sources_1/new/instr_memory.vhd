@@ -68,10 +68,14 @@ begin
     mem(17) <= "11100010100000000010000000001101";
     mem(18) <= "11100010100000000010000000001010";
     mem(19) <= "11100101100000000010000001100100";
-    mem(20) <= X"E3520005";
-    mem(21) <= X"E1530004";
-    mem(22) <= X"E2F50001";
-    mem(23) <= X"E0F20003";
+    mem(20) <= X"E3520005";                         -- CMP R2, #5
+    mem(21) <= X"E1530004";                         -- CMP R3, R4
+    mem(22) <= X"E2F50001";                         -- CMN R5, #2
+    mem(23) <= X"E0F20003";                         -- CMN R2, R3
+    mem(24) <= "11100000100000000010000101000101";  -- ADD R0, R2, R5, ASR #2   => Résultat attendu doit être 0xFFFF FFFF
+    mem(25) <= "11100000010001000011000110000111";  -- SUB R3, R4, R7, LSL #3   => Résultat attendu doit être 0x27
+    mem(26) <= "11100000000001100100001001001000";  -- AND R4, R6, R8, LSR #4   => Résultat attendu doit être 0x0
+    mem(27) <= "11100001100001110001000011101000";  -- ORR R1, R7, R8, ROR #1   => Résultat attendu doit être 0xFFFF FFFF
 
     -- Output (PC[6:2])nth instruction
     Rd <= mem(TO_INTEGER(unsigned(A(6 downto 2))));
